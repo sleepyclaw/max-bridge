@@ -1,0 +1,15 @@
+[Unit]
+Description=Max Bridge Server
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/max-bridge
+EnvironmentFile=/opt/max-bridge/.env
+ExecStart=/usr/bin/env node /opt/max-bridge/server.js
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

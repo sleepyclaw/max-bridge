@@ -1,0 +1,14 @@
+[Unit]
+Description=Max Bridge Router
+After=max-bridge.service
+
+[Service]
+Type=simple
+User=grok
+WorkingDirectory=/home/grok/.openclaw/workspace/max-bridge
+ExecStart=/usr/bin/node bridge-router.js
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
