@@ -1,18 +1,14 @@
 # Max Bridge
 
-Simple bridge between a Max bot webhook and OpenClaw.
+A small HTTP bridge between a Max bot webhook and OpenClaw.
 
-## What it does
+## Design
 
-- accepts Max webhook messages on `POST /webhook/incoming`
-- authenticates them with a shared bearer token
-- forwards the message to an OpenClaw target you configure
-- returns the assistant reply directly in the HTTP response
-
-This deployment is intentionally simple:
+This repo is intentionally simple:
 - one Node service
+- one main file: `server.js`
 - no polling sidecar
-- no outbound/proactive callback logic
+- no outbound callback logic
 - default port `7734`
 
 ## Environment
@@ -35,16 +31,9 @@ OWNER_NAME=
 
 ## API
 
-### POST `/webhook/incoming`
+### `POST /webhook/incoming`
 
-Headers:
-
-```http
-Authorization: Bearer <BRIDGE_TOKEN>
-Content-Type: application/json
-```
-
-Body example:
+Authenticate with a bearer token and send a JSON payload like:
 
 ```json
 {
@@ -58,25 +47,18 @@ Body example:
 }
 ```
 
-Response when a reply exists:
+Possible responses:
+- `200 OK` with a direct reply body
+- `204 No Content` when OpenClaw returns no reply
+- `401 Unauthorized`
+- `429 Too Many Requests`
+- `502 Bad Gateway`
 
-```json
-{
-  "response_text": "Hi there!",
-  "response_type": "text",
-  "actions": []
-}
-```
+### `GET /health`
 
-If OpenClaw returns `NO_REPLY` or `HEARTBEAT_OK`, the bridge returns:
+Returns service health info.
 
-- `204 No Content`
-
-### GET `/health`
-
-Returns basic health info.
-
-## Run locally
+## Local run
 
 ```bash
 npm install
@@ -86,4 +68,4 @@ npm start
 
 ## systemd
 
-Example unit file is included as `max-bridge.service`.
+Install `max-bridge.service` and point it at this repo checkout.

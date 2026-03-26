@@ -1,7 +1,5 @@
 # Max Bridge API Contract
 
-**Base URL:** `https://your-domain.example`
-
 ## Authentication
 
 All requests must include:
@@ -12,11 +10,11 @@ Authorization: Bearer <token>
 
 ## Endpoints
 
-### POST `/webhook/incoming`
+### `POST /webhook/incoming`
 
-Forward one incoming Max message to OpenClaw and get a direct reply.
+Forward one incoming Max message to OpenClaw and return a direct reply.
 
-Request:
+Example request:
 
 ```json
 {
@@ -32,7 +30,7 @@ Request:
 }
 ```
 
-Successful response:
+Example success response:
 
 ```json
 {
@@ -42,16 +40,16 @@ Successful response:
 }
 ```
 
-Possible statuses:
-- `200 OK` — reply returned
-- `204 No Content` — no reply needed
-- `401 Unauthorized` — invalid token
-- `429 Too Many Requests` — per-chat rate limit
-- `502 Bad Gateway` — OpenClaw invocation failed
+Statuses:
+- `200 OK`
+- `204 No Content`
+- `401 Unauthorized`
+- `429 Too Many Requests`
+- `502 Bad Gateway`
 
-### GET `/health`
+### `GET /health`
 
-Response:
+Example response:
 
 ```json
 {

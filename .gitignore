@@ -13,24 +13,11 @@ yarn-error.log*
 logs/
 *.log
 
-# Runtime data
-pids/
-*.pid
-*.seed
-*.pid.lock
-
-# Coverage directory used by tools like istanbul
+# Coverage
 coverage/
 
-# Temporary files
+# Temporary/editor files
 *.swp
 *.swo
 *~
 .DS_Store
-
-# Queue directories
-/tmp/clawd-bridge/
-/tmp/max-bridge/
-
-# State files
-.forwarder-state.json
