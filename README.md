@@ -1,6 +1,16 @@
 # Max Bridge
 
-A small HTTP bridge between a Max bot webhook and OpenClaw.
+A small, clean HTTP bridge between a Max bot webhook and OpenClaw.
+
+Max Bridge accepts incoming webhook messages, forwards them to OpenClaw, and returns the assistant reply directly in the HTTP response. The whole point is to stay simple: one service, one file, one job.
+
+## Why this exists
+
+- lightweight webhook → OpenClaw bridge
+- synchronous request/response flow
+- tiny deployment surface
+- easy to run under systemd
+- easy to understand and modify
 
 ## Design
 
